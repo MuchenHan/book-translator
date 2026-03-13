@@ -86,7 +86,7 @@ python3 scripts/build_docx.py ja_complete.txt output.docx \
   --title "书名" \
   --subtitle "原书名" \
   --author "作者" \
-  --year "1957" \
+  --year "2000" \
   --font "Yu Mincho" \
   --font-size 11 \
   --terms-file terminology.txt \
@@ -114,7 +114,7 @@ python3 scripts/build_docx.py ja_complete.txt output.docx \
 
 ## 使用场景
 
-- 心理学/哲学/社会学经典著作电子化（如 Skinner 的《Verbal Behavior》）
+- 心理学/哲学/社会学经典著作电子化
 - 绝版/稀缺学术书籍的个人研究数字化
 - 研究生和研究者的跨语言阅读辅助
 

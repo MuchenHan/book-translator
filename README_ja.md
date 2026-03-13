@@ -86,7 +86,7 @@ python3 scripts/build_docx.py ja_complete.txt output.docx \
   --title "書籍タイトル" \
   --subtitle "原題" \
   --author "著者名" \
-  --year "1957" \
+  --year "2000" \
   --font "Yu Mincho" \
   --font-size 11 \
   --terms-file terminology.txt \
@@ -114,7 +114,7 @@ python3 scripts/build_docx.py ja_complete.txt output.docx \
 
 ## 活用事例
 
-- 心理学・哲学・社会学の古典的著作の電子化（例：スキナーの『Verbal Behavior』）
+- 心理学・哲学・社会学の古典的著作の電子化
 - 絶版・希少な学術書の個人研究用デジタル化
 - 大学院生・研究者のための多言語読解支援
 

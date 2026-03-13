@@ -60,14 +60,14 @@ Fill any missing pages manually if sub-agents skipped.
 
 ```bash
 python3 scripts/build_docx.py ja_complete.txt output.docx \
-  --title "言語行動" \
-  --subtitle "Verbal Behavior" \
-  --author "B.F. スキナー（B.F. Skinner）" \
-  --year "1957" \
+  --title "Book Title" \
+  --subtitle "Original Title" \
+  --author "Author Name" \
+  --year "2000" \
   --font "Yu Mincho" \
   --font-size 11 \
   --terms-file terminology.txt \
-  --sections "タクト:1,拡張タクト:1,般化的拡張:2,隠喩的拡張:2,抽象化:1"
+  --sections "Chapter 1:1,Section 1.1:2,Section 1.2:2"
 ```
 
 Options:

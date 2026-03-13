@@ -2,9 +2,9 @@
 
 ## Style
 - である調（学術書標準）
-- First occurrence of technical terms: 「タクト（tact）」format
+- First occurrence of technical terms: 「統語論（syntax）」format
 - Italics → 「」, quotes → 「」, book titles → 『』
-- Person names → katakana（初出時に原語併記: スキナー（Skinner））
+- Person names → katakana（初出時に原語併記: チョムスキー（Chomsky））
 - Preserve footnote numbers, Figure references
 - Page markers: `=== p.XX ===` must be preserved
 
@@ -18,9 +18,9 @@ For chapters > 5,000 words, split into ~3,000-word batches and spawn parallel su
 ## Terminology Management
 Create a terminology file (one term per line, TSV or `eng → jpn` format):
 ```
-verbal behavior → 言語行動
-tact → タクト
-reinforcement → 強化
+phoneme → 音素
+morpheme → 形態素
+syntax → 統語論
 ```
 Pass to `build_docx.py --terms-file terminology.txt` for automatic appendix.
 

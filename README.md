@@ -84,7 +84,7 @@ python3 scripts/build_docx.py ja_complete.txt output.docx \
   --title "Book Title" \
   --subtitle "Original Title" \
   --author "Author Name" \
-  --year "1957" \
+  --year "2000" \
   --font "Yu Mincho" \
   --font-size 11 \
   --terms-file terminology.txt \
@@ -112,7 +112,7 @@ See [references/translation-guide.md](references/translation-guide.md) for detai
 
 ## Use Cases
 
-- **Digitizing academic classics** — psychology, philosophy, sociology monographs (e.g., Skinner's *Verbal Behavior*)
+- **Digitizing academic classics** — psychology, philosophy, sociology monographs
 - **Preserving rare texts** — personal research digitization of out-of-print books available only as scans
 - **Cross-language reading support** — helping graduate students and researchers engage with English-language scholarship
 
