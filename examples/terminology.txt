@@ -1,0 +1,17 @@
+# Example terminology file for academic translation
+# Format: english → japanese (one term per line)
+# Also supports TSV (tab-separated) and CSV formats
+
+phoneme → 音素
+morpheme → 形態素
+syntax → 統語論
+semantics → 意味論
+pragmatics → 語用論
+discourse → 談話
+cognition → 認知
+perception → 知覚
+metaphor → 隠喩
+analogy → 類推
+hypothesis → 仮説
+methodology → 方法論
+empirical → 実証的
