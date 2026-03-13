@@ -24,6 +24,7 @@ env/
 *.png
 *.txt
 !requirements.txt
+!examples/terminology.txt
 
 # OCR temp
 images/

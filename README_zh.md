@@ -56,7 +56,28 @@ python3 scripts/ocr_vision.py input.pdf output_dir --start-page 81 --dpi 150 --l
 
 ### 第 2 步：翻译
 
-超过 5,000 词的章节，按页码边界拆分为约 3,000 词的批次，并行翻译。
+> **注意**：本项目不包含独立的翻译脚本。翻译通过 LLM（如 Claude、GPT）手动完成，或通过 Claude Code skill 自动化完成。
+
+超过 5,000 词的章节，按页码边界拆分为约 3,000 词的批次：
+
+```bash
+# 示例：按行号拆分（对应页码标记位置）
+sed -n '1,298p' all_pages.txt > part1.txt
+sed -n '299,600p' all_pages.txt > part2.txt
+sed -n '601,$p' all_pages.txt > part3.txt
+```
+
+用你偏好的 LLM 翻译各批次，然后合并：
+
+```bash
+cat ja_part1.txt ja_part2.txt ja_part3.txt > ja_complete.txt
+# 验证无页码缺失：
+grep -c "=== p\." ja_complete.txt
+```
+
+如需自动化并行翻译，请使用 **Claude Code skill**（见下方 [Claude Code 集成](#claude-code-集成)），它会自动处理拆分、翻译和合并。
+
+翻译规范和 sub-agent prompt 模板详见 [references/translation-guide.md](references/translation-guide.md)。
 
 ### 第 3 步：生成 Docx
 
@@ -71,6 +92,13 @@ python3 scripts/build_docx.py ja_complete.txt output.docx \
   --terms-file terminology.txt \
   --sections "章节1:1,章节2:2"
 ```
+
+生成的 `.docx` 文件包含：
+
+- 封面页（书名、副标题、作者、年份）
+- 可点击的目次（在 Word 中右键更新即可）
+- 章节标题，对应原书页码范围
+- 术语对照表（如提供 `--terms-file`）
 
 ## Claude Code 集成
 
@@ -93,6 +121,12 @@ python3 scripts/build_docx.py ja_complete.txt output.docx \
 ## 贡献
 
 欢迎提交 issue 和 pull request！
+
+特别欢迎以下方向的贡献：
+
+- 扩展语言对（如 EN→ZH、EN→KO）
+- 替代 OCR 后端（如 Tesseract，以支持 Linux）
+- 输出格式扩展（如 EPUB、LaTeX）
 
 ## 许可证
 

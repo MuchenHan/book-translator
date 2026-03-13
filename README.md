@@ -54,7 +54,28 @@ python3 scripts/ocr_vision.py input.pdf output_dir --start-page 81 --dpi 150 --l
 
 ### Step 2: Translate
 
-For chapters exceeding ~5,000 words, split the text at page boundaries into ~3,000-word batches and translate them in parallel. This keeps each batch within model context limits and significantly reduces total translation time.
+> **Note:** There is no standalone translation script. Translation is performed via LLM (e.g., Claude, GPT) either manually or through the Claude Code skill integration.
+
+For chapters exceeding ~5,000 words, split the OCR output at page boundaries into ~3,000-word batches:
+
+```bash
+# Example: split at line numbers corresponding to page markers
+sed -n '1,298p' all_pages.txt > part1.txt
+sed -n '299,600p' all_pages.txt > part2.txt
+sed -n '601,$p' all_pages.txt > part3.txt
+```
+
+Translate each batch using your preferred LLM, then merge:
+
+```bash
+cat ja_part1.txt ja_part2.txt ja_part3.txt > ja_complete.txt
+# Verify no page gaps:
+grep -c "=== p\." ja_complete.txt
+```
+
+For automated parallel translation, use the **Claude Code skill** (see [Claude Code Integration](#claude-code-integration) below) which handles splitting, translating, and merging automatically.
+
+See [references/translation-guide.md](references/translation-guide.md) for translation conventions and the sub-agent prompt template.
 
 ### Step 3: Build Docx
 
@@ -97,7 +118,13 @@ See [references/translation-guide.md](references/translation-guide.md) for detai
 
 ## Contributing
 
-Contributions are welcome. Please feel free to submit issues and pull requests. If you extend the tool to support additional language pairs or output formats, a PR would be appreciated.
+Contributions are welcome. Please feel free to submit issues and pull requests.
+
+In particular, PRs for these areas are appreciated:
+
+- Additional language pairs (e.g., EN→ZH, EN→KO)
+- Alternative OCR backends (e.g., Tesseract for Linux support)
+- Output format extensions (e.g., EPUB, LaTeX)
 
 ## License
 

@@ -56,7 +56,28 @@ python3 scripts/ocr_vision.py input.pdf output_dir --start-page 81 --dpi 150 --l
 
 ### ステップ 2：翻訳
 
-5,000 語を超える章はページ境界で約 3,000 語のバッチに分割し、並列翻訳を行う。
+> **注意：** 本プロジェクトには独立した翻訳スクリプトは含まれていない。翻訳は LLM（Claude、GPT 等）を用いて手動で行うか、Claude Code skill による自動化で実行する。
+
+5,000 語を超える章はページ境界で約 3,000 語のバッチに分割する：
+
+```bash
+# 例：ページマーカーに対応する行番号で分割
+sed -n '1,298p' all_pages.txt > part1.txt
+sed -n '299,600p' all_pages.txt > part2.txt
+sed -n '601,$p' all_pages.txt > part3.txt
+```
+
+各バッチを LLM で翻訳した後、結合する：
+
+```bash
+cat ja_part1.txt ja_part2.txt ja_part3.txt > ja_complete.txt
+# ページ欠落がないことを確認：
+grep -c "=== p\." ja_complete.txt
+```
+
+自動並列翻訳を行う場合は、**Claude Code skill**（下記の [Claude Code 統合](#claude-code-統合) を参照）を使用されたい。分割・翻訳・結合を自動的に処理する。
+
+翻訳規範および sub-agent プロンプトテンプレートは [references/translation-guide.md](references/translation-guide.md) を参照されたい。
 
 ### ステップ 3：Docx 生成
 
@@ -71,6 +92,13 @@ python3 scripts/build_docx.py ja_complete.txt output.docx \
   --terms-file terminology.txt \
   --sections "セクション1:1,セクション2:2"
 ```
+
+生成される `.docx` ファイルには以下が含まれる：
+
+- 表紙ページ（書名、副題、著者、刊行年）
+- クリック可能な目次（Word で右クリック → フィールドの更新で生成）
+- セクション見出し（原書のページ範囲に対応）
+- 術語対照表（`--terms-file` を指定した場合）
 
 ## Claude Code 統合
 
@@ -93,6 +121,12 @@ python3 scripts/build_docx.py ja_complete.txt output.docx \
 ## コントリビューション
 
 Issue や Pull Request の提出を歓迎する。
+
+特に以下の領域への貢献を歓迎する：
+
+- 追加言語ペア（例：EN→ZH、EN→KO）
+- 代替 OCR バックエンド（例：Tesseract による Linux 対応）
+- 出力形式の拡張（例：EPUB、LaTeX）
 
 ## ライセンス
 

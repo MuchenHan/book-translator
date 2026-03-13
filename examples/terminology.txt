@@ -1,0 +1,17 @@
+# Example terminology file for Skinner's "Verbal Behavior"
+# Format: english → japanese (one term per line)
+# Also supports TSV (tab-separated) and CSV formats
+
+verbal behavior → 言語行動
+tact → タクト
+mand → マンド
+echoic → エコーイック
+intraverbal → イントラバーバル
+autoclitic → オートクリティック
+reinforcement → 強化
+stimulus → 刺激
+response → 反応
+operant → オペラント
+functional analysis → 機能分析
+contingency → 随伴性
+discriminative stimulus → 弁別刺激
